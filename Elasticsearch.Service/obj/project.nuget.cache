@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "dgSpecHash": "c5KyN5CwlsTHIrhAJv6C3uYw+ILWSHynj7tQYqHm7SC0X8p4Y2lKrPG3MYn30/ilRWtYHOPK2L+L2RWsdM2ziA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Developer\\Documents\\Olonyl\\Smart-Apartment-Data\\04 - Elastikserch\\Elasticsearch.Service\\Elasticsearch.Service.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Developer\\.nuget\\packages\\elasticsearch.net\\7.9.0\\elasticsearch.net.7.9.0.nupkg.sha512",
+    "C:\\Users\\Developer\\.nuget\\packages\\microsoft.csharp\\4.6.0\\microsoft.csharp.4.6.0.nupkg.sha512",
+    "C:\\Users\\Developer\\.nuget\\packages\\microsoft.extensions.configuration\\3.1.9\\microsoft.extensions.configuration.3.1.9.nupkg.sha512",
+    "C:\\Users\\Developer\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\3.1.9\\microsoft.extensions.configuration.abstractions.3.1.9.nupkg.sha512",
+    "C:\\Users\\Developer\\.nuget\\packages\\microsoft.extensions.configuration.binder\\3.1.9\\microsoft.extensions.configuration.binder.3.1.9.nupkg.sha512",
+    "C:\\Users\\Developer\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.1.9\\microsoft.extensions.dependencyinjection.abstractions.3.1.9.nupkg.sha512",
+    "C:\\Users\\Developer\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.1.9\\microsoft.extensions.logging.abstractions.3.1.9.nupkg.sha512",
+    "C:\\Users\\Developer\\.nuget\\packages\\microsoft.extensions.options\\3.1.9\\microsoft.extensions.options.3.1.9.nupkg.sha512",
+    "C:\\Users\\Developer\\.nuget\\packages\\microsoft.extensions.options.configurationextensions\\3.1.9\\microsoft.extensions.options.configurationextensions.3.1.9.nupkg.sha512",
+    "C:\\Users\\Developer\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.9\\microsoft.extensions.primitives.3.1.9.nupkg.sha512",
+    "C:\\Users\\Developer\\.nuget\\packages\\nest\\7.9.0\\nest.7.9.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
+    "C:\\Users\\Developer\\.nuget\\packages\\system.diagnostics.diagnosticsource\\4.5.1\\system.diagnostics.diagnosticsource.4.5.1.nupkg.sha512"
+  ],
+  "logs": []
+}

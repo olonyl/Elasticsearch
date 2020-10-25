@@ -1,0 +1,9 @@
+C:\Users\Developer\Documents\Olonyl\Smart-Apartment-Data\04 - Elastikserch\Elasticsearch.Service\bin\Debug\netcoreapp3.1\Elasticsearch.Service.deps.json
+C:\Users\Developer\Documents\Olonyl\Smart-Apartment-Data\04 - Elastikserch\Elasticsearch.Service\bin\Debug\netcoreapp3.1\Elasticsearch.Service.dll
+C:\Users\Developer\Documents\Olonyl\Smart-Apartment-Data\04 - Elastikserch\Elasticsearch.Service\obj\Debug\netcoreapp3.1\Elasticsearch.Service.AssemblyInfoInputs.cache
+C:\Users\Developer\Documents\Olonyl\Smart-Apartment-Data\04 - Elastikserch\Elasticsearch.Service\obj\Debug\netcoreapp3.1\Elasticsearch.Service.AssemblyInfo.cs
+C:\Users\Developer\Documents\Olonyl\Smart-Apartment-Data\04 - Elastikserch\Elasticsearch.Service\obj\Debug\netcoreapp3.1\Elasticsearch.Service.csprojAssemblyReference.cache
+C:\Users\Developer\Documents\Olonyl\Smart-Apartment-Data\04 - Elastikserch\Elasticsearch.Service\bin\Debug\netcoreapp3.1\Elasticsearch.Service.pdb
+C:\Users\Developer\Documents\Olonyl\Smart-Apartment-Data\04 - Elastikserch\Elasticsearch.Service\obj\Debug\netcoreapp3.1\Elasticsearch.Service.dll
+C:\Users\Developer\Documents\Olonyl\Smart-Apartment-Data\04 - Elastikserch\Elasticsearch.Service\obj\Debug\netcoreapp3.1\Elasticsearch.Service.pdb
+C:\Users\Developer\Documents\Olonyl\Smart-Apartment-Data\04 - Elastikserch\Elasticsearch.Service\obj\Debug\netcoreapp3.1\Elasticsearch.Service.csproj.CoreCompileInputs.cache
