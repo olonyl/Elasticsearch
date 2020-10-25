@@ -1,10 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "8q7FpxqcAN81lzjUVrwB17Bdgv0fATjhz/jGEbhxk45TxdVUXc/yAtOGsKq0vtJChxMbiLZ9NxlOWM46PShfsg==",
+  "dgSpecHash": "85zweHcB7Gcw/Dzxk3Xwb/CxLUez/Ad2bXdSwC0JpNk8cjas6mSEpGimvAU86XZqhWGVyYZ8cCxCWQLFIZMVuw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Developer\\Documents\\Olonyl\\Smart-Apartment-Data\\04 - Elastikserch\\Elastticsearch.API\\Elastticsearch.API.csproj",
+  "projectFilePath": "C:\\Users\\Developer\\Documents\\Olonyl\\Smart-Apartment-Data\\04 - Elastikserch\\Elastticsearch.API\\Elasticsearch.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Developer\\.nuget\\packages\\elasticsearch.net\\7.9.0\\elasticsearch.net.7.9.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.aspnetcore.mvc.abstractions\\2.2.0\\microsoft.aspnetcore.mvc.abstractions.2.2.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.aspnetcore.routing.abstractions\\2.2.0\\microsoft.aspnetcore.routing.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Developer\\.nuget\\packages\\microsoft.csharp\\4.6.0\\microsoft.csharp.4.6.0.nupkg.sha512",
     "C:\\Users\\Developer\\.nuget\\packages\\microsoft.extensions.configuration\\3.1.9\\microsoft.extensions.configuration.3.1.9.nupkg.sha512",
     "C:\\Users\\Developer\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\3.1.9\\microsoft.extensions.configuration.abstractions.3.1.9.nupkg.sha512",
@@ -14,9 +18,11 @@
     "C:\\Users\\Developer\\.nuget\\packages\\microsoft.extensions.options\\3.1.9\\microsoft.extensions.options.3.1.9.nupkg.sha512",
     "C:\\Users\\Developer\\.nuget\\packages\\microsoft.extensions.options.configurationextensions\\3.1.9\\microsoft.extensions.options.configurationextensions.3.1.9.nupkg.sha512",
     "C:\\Users\\Developer\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.9\\microsoft.extensions.primitives.3.1.9.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.net.http.headers\\2.2.0\\microsoft.net.http.headers.2.2.0.nupkg.sha512",
     "C:\\Users\\Developer\\.nuget\\packages\\nest\\7.9.0\\nest.7.9.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
-    "C:\\Users\\Developer\\.nuget\\packages\\system.diagnostics.diagnosticsource\\4.5.1\\system.diagnostics.diagnosticsource.4.5.1.nupkg.sha512"
+    "C:\\Users\\Developer\\.nuget\\packages\\system.diagnostics.diagnosticsource\\4.5.1\\system.diagnostics.diagnosticsource.4.5.1.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.text.encodings.web\\4.5.0\\system.text.encodings.web.4.5.0.nupkg.sha512"
   ],
   "logs": []
 }

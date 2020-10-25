@@ -20,22 +20,41 @@ namespace Elastticsearch.API.Controllers
 
         private readonly ILogger<HomeController> _logger;
         private readonly ISearchEngineService _elasticsearchService;
-        public HomeController(ILogger<HomeController> logger, ISearchEngineService elasticsearchService)
+        public HomeController(ILogger<HomeController> logger, 
+            ISearchEngineService elasticsearchService)
         {
             _logger = logger;
             _elasticsearchService = elasticsearchService;
         }
 
         [HttpGet]
-        public IEnumerable<SearchResult> Get()
+        public IActionResult Get(SearchFilter filter)
         {
-            var parameter = new SearchParameter
+            try
             {
-                Market = String.Empty,
-                Phrase = "Abilene"
-            };
-         return   _elasticsearchService.Search(parameter);
-         
+                var data = _elasticsearchService.Search(filter);
+                if (data == null) return NotFound();
+
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpPost]
+        public IActionResult Post(List<Building> data)
+        {
+            try
+            {
+                _elasticsearchService.UploadBuildings(data);
+
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

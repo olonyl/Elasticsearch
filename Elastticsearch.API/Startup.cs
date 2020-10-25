@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Nest;
 
 namespace Elastticsearch.API
 {
@@ -26,10 +27,14 @@ namespace Elastticsearch.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSearchEngineService(Configuration.GetSection("Elasticsearch"), o =>
+            services.AddSearchEngineService(o =>
             {
+                var url = Configuration.GetSection("Elasticsearch:Url").Value;
+                var settings = new ConnectionSettings(new Uri(url)).EnableDebugMode();
+                o.Client = new ElasticClient(settings);
                 o.Congifure();
-            });
+            }
+            );
             services.AddControllers();
         }
 

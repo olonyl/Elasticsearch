@@ -7,9 +7,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Presentation", "1. Prese
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Application", "2. Application", "{78D23048-7A1E-4623-A088-3111970A7FCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Service", "..\Elasticsearch.Service\Elasticsearch.Service.csproj", "{05363B6B-FA7B-4ABF-A672-243D40B7389B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elasticsearch.Service", "..\Elasticsearch.Service\Elasticsearch.Service.csproj", "{05363B6B-FA7B-4ABF-A672-243D40B7389B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elastticsearch.API", "..\Elastticsearch.API\Elastticsearch.API.csproj", "{4878989F-F7B9-4528-B57E-8273F331B46B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elasticsearch.API", "..\Elastticsearch.API\Elasticsearch.API.csproj", "{4878989F-F7B9-4528-B57E-8273F331B46B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticseach.Upload", "Elasticseach.Upload\Elasticseach.Upload.csproj", "{7431C1C1-331F-4BC1-B86C-5C822DF9BE21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{4878989F-F7B9-4528-B57E-8273F331B46B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4878989F-F7B9-4528-B57E-8273F331B46B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4878989F-F7B9-4528-B57E-8273F331B46B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7431C1C1-331F-4BC1-B86C-5C822DF9BE21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7431C1C1-331F-4BC1-B86C-5C822DF9BE21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7431C1C1-331F-4BC1-B86C-5C822DF9BE21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7431C1C1-331F-4BC1-B86C-5C822DF9BE21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{05363B6B-FA7B-4ABF-A672-243D40B7389B} = {78D23048-7A1E-4623-A088-3111970A7FCE}
 		{4878989F-F7B9-4528-B57E-8273F331B46B} = {FE4C9B28-D0FE-424F-823E-1003EF20E364}
+		{7431C1C1-331F-4BC1-B86C-5C822DF9BE21} = {FE4C9B28-D0FE-424F-823E-1003EF20E364}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A4E8A954-C41D-4539-A296-E3787F09AD46}
