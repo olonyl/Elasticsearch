@@ -48,8 +48,7 @@ namespace Elasticseach.Upload
 
                 var managementTransformation = management.Select(s => new Building
                 {
-                    OriginalId = s.Management.Id,
-                    Id = $"{ ConstantsContainer.TYPEMANAGEMENT}-{s.Management.Id}",
+                    Id = s.Management.Id,
                     Name = s.Management.Name,
                     Market = s.Management.Market,
                     State = s.Management.State,
@@ -59,8 +58,7 @@ namespace Elasticseach.Upload
 
                 var propertiesTransformation = properties.Select(s => new Building
                 {
-                    OriginalId = s.Property.Id,
-                    Id = $"{ ConstantsContainer.TYPEPROPERTY}-{s.Property.Id}",
+                    Id = s.Property.Id,
                     Name = s.Property.Name,
                     Market = s.Property.Market,
                     State = s.Property.State,

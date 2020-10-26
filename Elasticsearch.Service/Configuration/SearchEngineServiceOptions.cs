@@ -10,57 +10,23 @@ namespace Elasticsearch.Service.Configuration
 {
     public class SearchEngineServiceOptions
     {
-        public string Url { get; set; }
+        public ElasticClient Client { get; set; }
         public void Congifure()
         {
-
-            var settings = new ConnectionSettings(new Uri(Url))
-                .EnableDebugMode();
-            var client = new ElasticClient(settings);
-
-            CreateManagementIndex(client);
-            CreateProperyIndex(client);
+            CreateIndex();
         }
 
-        private void CreateManagementIndex(ElasticClient client) {
-            if (client.Indices.Exists(ConstantsContainer.INDEXMANAGEMENT).Exists)
-                return;
-
-            client.Indices.Create(ConstantsContainer.INDEXMANAGEMENT, i => i
-              .Settings(s => s
-                  .NumberOfShards(2)
-                  .NumberOfReplicas(0)
-              )
-              .Map<Management>(m => m
-              .Properties(p => p
-                               .Text(c => c
-                                   .Name(n => n.Name)
-                                   .Analyzer("snowball")
-                                   .SearchAnalyzer("snowball")
-                               )
-                               .Text(c => c
-                                   .Name(n => n.Market)
-                                   .Analyzer("snowball")
-                                   .SearchAnalyzer("snowball")
-                               )
-                                .Text(c => c
-                                   .Name(n => n.State)
-                               )
-                           )
-              )
-          );
-        }
-        private void CreateProperyIndex(ElasticClient client)
+        private void CreateIndex()
         {
-            if (client.Indices.Exists(ConstantsContainer.INDEXPROPERTY).Exists)
+            if (Client.Indices.Exists(ConstantsContainer.INDEXNAME).Exists)
                 return;
 
-            client.Indices.Create(ConstantsContainer.INDEXPROPERTY, i => i
+            Client.Indices.Create(ConstantsContainer.INDEXNAME, i => i
               .Settings(s => s
                   .NumberOfShards(2)
                   .NumberOfReplicas(0)
               )
-              .Map<Apartment>(m => m
+              .Map<Building>(m => m
               .Properties(p => p
                                .Text(c => c
                                    .Name(n => n.Name)
@@ -69,11 +35,11 @@ namespace Elasticsearch.Service.Configuration
                                )
                                .Text(c => c
                                    .Name(n => n.Market)
-                                   .Analyzer("snowball")
-                                   .SearchAnalyzer("snowball")
+                                    .Analyzer("keyworkd")
+                                   .SearchAnalyzer("keyworkd")                                   
                                )
                                  .Text(c => c
-                                   .Name(n => n.FormerName)
+                                   .Name(n => n.Formername)
                                    .Analyzer("snowball")
                                    .SearchAnalyzer("snowball")
                                )
@@ -82,8 +48,15 @@ namespace Elasticsearch.Service.Configuration
                                 .Analyzer("snowball")
                                 .SearchAnalyzer("snowball")
                                )
+                                   .Text(c => c
+                                .Name(n => n.StreetAddress)
+                                .Analyzer("snowball")
+                                .SearchAnalyzer("snowball")
+                               )
                                 .Text(c => c
                                    .Name(n => n.State)
+                                    .Analyzer("keyworkd")
+                                   .SearchAnalyzer("keyworkd")
                                )
                            )
               )

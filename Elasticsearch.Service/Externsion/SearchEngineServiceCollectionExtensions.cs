@@ -11,12 +11,11 @@ namespace Elasticsearch.Service.Externsion
 {
     public static class SearchEngineServiceCollectionExtensions
     {
-        public static IServiceCollection AddSearchEngineService(this IServiceCollection collection, IConfiguration config, Action<SearchEngineServiceOptions> options)
+        public static IServiceCollection AddSearchEngineService(this IServiceCollection collection,  Action<SearchEngineServiceOptions> options)
         {
             if (collection == null) throw new ArgumentNullException(nameof(collection));
-            if (config == null) throw new ArgumentNullException(nameof(config));
+            if (options == null) throw new ArgumentNullException(nameof(options));
 
-            collection.Configure<SearchEngineServiceOptions>(config);
             collection.Configure(options);
             return collection.AddTransient<ISearchEngineService, SearchEngineService>();
         }

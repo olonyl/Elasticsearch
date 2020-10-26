@@ -26,8 +26,8 @@ C:\Users\Developer\Documents\Olonyl\Smart-Apartment-Data\04 - Elastikserch\Elast
 C:\Users\Developer\Documents\Olonyl\Smart-Apartment-Data\04 - Elastikserch\Elastticsearch.API\bin\Debug\netcoreapp3.1\Elasticsearch.Service.dll
 C:\Users\Developer\Documents\Olonyl\Smart-Apartment-Data\04 - Elastikserch\Elastticsearch.API\bin\Debug\netcoreapp3.1\Elasticsearch.Service.pdb
 C:\Users\Developer\Documents\Olonyl\Smart-Apartment-Data\04 - Elastikserch\Elastticsearch.API\obj\Debug\netcoreapp3.1\Elastticsearch.API.csprojAssemblyReference.cache
-C:\Users\Developer\Documents\Olonyl\Smart-Apartment-Data\04 - Elastikserch\Elastticsearch.API\obj\Debug\netcoreapp3.1\Elastticsearch.API.csproj.CoreCompileInputs.cache
-C:\Users\Developer\Documents\Olonyl\Smart-Apartment-Data\04 - Elastikserch\Elastticsearch.API\obj\Debug\netcoreapp3.1\Elastticsearch.API.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Developer\Documents\Olonyl\Smart-Apartment-Data\04 - Elastikserch\Elastticsearch.API\obj\Debug\netcoreapp3.1\Elastticsearch.API.dll
 C:\Users\Developer\Documents\Olonyl\Smart-Apartment-Data\04 - Elastikserch\Elastticsearch.API\obj\Debug\netcoreapp3.1\Elastticsearch.API.pdb
 C:\Users\Developer\Documents\Olonyl\Smart-Apartment-Data\04 - Elastikserch\Elastticsearch.API\obj\Debug\netcoreapp3.1\Elastticsearch.API.genruntimeconfig.cache
+C:\Users\Developer\Documents\Olonyl\Smart-Apartment-Data\04 - Elastikserch\Elastticsearch.API\obj\Debug\netcoreapp3.1\Elastticsearch.API.csproj.CoreCompileInputs.cache
+C:\Users\Developer\Documents\Olonyl\Smart-Apartment-Data\04 - Elastikserch\Elastticsearch.API\obj\Debug\netcoreapp3.1\Elastticsearch.API.MvcApplicationPartsAssemblyInfo.cache

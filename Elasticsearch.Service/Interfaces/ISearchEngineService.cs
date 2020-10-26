@@ -7,6 +7,7 @@ namespace Elasticsearch.Service.Interface
 {
     public interface ISearchEngineService
     {
-        List<SearchResult> Search(SearchParameter parameter);
+        List<Building> Search(SearchFilter parameter);
+        void UploadBuildings(List<Building> data);
     }
 }
