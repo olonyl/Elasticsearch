@@ -21,12 +21,6 @@ namespace Elasticseach.Upload
 
             var data = GetProperties();
 
-            data.Add(new Building
-            {
-                Name = "San Andres",
-                Formername = "San Andres",
-                Market = "San Andres"
-            });
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"Uploading {data.Count} records into Elastic Search:Index - {ConstantsContainer.INDEXNAME}");
 
