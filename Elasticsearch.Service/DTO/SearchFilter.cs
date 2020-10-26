@@ -20,6 +20,7 @@ namespace Elasticsearch.Service.DTO
         /// <summary>
         /// Phrase to search
         /// </summary>
+        [Required]
         public string Phrase { get; set; } 
     }
 }

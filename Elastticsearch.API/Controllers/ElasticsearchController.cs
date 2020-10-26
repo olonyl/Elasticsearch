@@ -14,11 +14,7 @@ namespace Elastticsearch.API.Controllers
    
     public class ElasticsearchController : BaseController
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
+     
         private readonly ILogger<ElasticsearchController> _logger;
         private readonly ISearchEngineService _elasticsearchService;
         public ElasticsearchController(ILogger<ElasticsearchController> logger, 
@@ -34,7 +30,7 @@ namespace Elastticsearch.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Authorize("read:properties")]
-        public IActionResult Get([FromBody] SearchFilter filter)
+        public IActionResult Get([FromQuery] SearchFilter filter)
         {
             try
             {
