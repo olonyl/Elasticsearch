@@ -23,24 +23,29 @@ namespace Elasticsearch.Service.Services
             _client = options.Value.Client;
         }
 
+     
         public List<Building> Search(SearchFilter filter)
         {
-            var result = _client.Search<Building>(s => s
+
+            var query = _client.Search<Building>(s => s
           .Index(ConstantsContainer.INDEXNAME)
           .From(0)
           .Size(filter.Limit)
-          .Query(q => q
-               .MultiMatch(m => m
-                  .Fields(fs => fs.Field(p => p.Market))
-                  .Query(filter.Market)
-               )
-            )
-           ).Documents.ToList();
+          .Query(q =>
+              q.Bool(b => b
+               .Should(filter.Market.Select(t => BuildPhraseQueryContainer(q, t, 1)).ToArray())
+              ) && q.MultiMatch(mm => mm
+                     .Fields(fs => fs.Field(p => p.Name).Field(p => p.Formername).Field(p => p.StreetAddress))
+                      .Query(filter.Phrase)
+                     )
+                  )
+              );
+
+            var result = query.Documents.ToList();
             return result;
         }
         public void UploadBuildings(List<Building> data)
         {
-            // _client.IndexMany(data, ConstantsContainer.INDEXNAME);
             var bulkAll = _client.BulkAll(data, b => b
                  .Index(ConstantsContainer.INDEXNAME) /* index */
                  .BackOffRetries(2)
@@ -53,13 +58,21 @@ namespace Elasticsearch.Service.Services
             bulkAll.Subscribe(new BulkAllObserver(
                 onNext: (b) => { Console.Write("."); },
                 onError: (e) => { throw e; },
-                onCompleted: () => {
+                onCompleted: () =>
+                {
                     Console.WriteLine();
                     waitHandle.Signal();
                 }
                 )); ;
             waitHandle.Wait();
         }
+
+        #region Helper
+        QueryContainer BuildPhraseQueryContainer(QueryContainerDescriptor<Building> qd, string term, int slop)
+        {
+            return qd.MatchPhrase(m => m.Field(f => f.Market).Query(term.ToLower()).Slop(slop));
+        }
+        #endregion
 
     }
 }

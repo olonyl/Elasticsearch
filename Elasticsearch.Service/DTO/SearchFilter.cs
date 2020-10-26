@@ -16,7 +16,7 @@ namespace Elasticsearch.Service.DTO
         /// <summary>
         /// Market to search properties
         /// </summary>
-        public string Market { get; set; } = String.Empty;
+        public List<String> Market { get; set; } = new List<string>();
         /// <summary>
         /// Phrase to search
         /// </summary>
