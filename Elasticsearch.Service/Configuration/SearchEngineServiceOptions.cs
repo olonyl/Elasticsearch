@@ -21,42 +21,58 @@ namespace Elasticsearch.Service.Configuration
             if (Client.Indices.Exists(ConstantsContainer.INDEXNAME).Exists)
                 return;
 
-            Client.Indices.Create(ConstantsContainer.INDEXNAME, i => i
+           var result =  Client.Indices.Create(ConstantsContainer.INDEXNAME, i => i
               .Settings(s => s
                   .NumberOfShards(2)
                   .NumberOfReplicas(0)
+                  .Analysis(a=>a
+                    .Analyzers(an=> an
+                        .Custom("customanalyzer", ca=>ca
+                            .Tokenizer("standard")
+                            .Filters("my_custom_stop_words_filter", "snowball", "lowercase")
+                        )
+                        .Custom("marketanalyzer", c=>c
+                            .Tokenizer("keyword")
+                            .Filters("lowercase")
+                        )
+                    )
+                    .TokenFilters(an=> an
+                    .Stop("my_custom_stop_words_filter", s=> s
+                           .StopWords("and", "or", "the", "into")
+                    )
+                    )
+                  )
               )
               .Map<Building>(m => m
               .Properties(p => p
                                .Text(c => c
                                    .Name(n => n.Name)
-                                   //.Analyzer("snowball")
-                                   //.SearchAnalyzer("snowball")
+                                   .Analyzer("customanalyzer")
+                                   .SearchAnalyzer("customanalyzer")
                                )
                                .Text(c => c
                                    .Name(n => n.Market)
-                                   // .Analyzer("keyworkd")
-                                   //.SearchAnalyzer("keyworkd")                                   
+                                    .Analyzer("marketanalyzer")
+                                   .SearchAnalyzer("marketanalyzer")
                                )
                                  .Text(c => c
                                    .Name(n => n.Formername)
-                                   //.Analyzer("snowball")
-                                   //.SearchAnalyzer("snowball")
+                                   .Analyzer("customanalyzer")
+                                   .SearchAnalyzer("customanalyzer")
                                )
                                  .Text(c => c
                                 .Name(n => n.City)
-                                //.Analyzer("snowball")
-                                //.SearchAnalyzer("snowball")
+                                .Analyzer("customanalyzer")
+                                .SearchAnalyzer("customanalyzer")
                                )
                                    .Text(c => c
                                 .Name(n => n.StreetAddress)
-                                //.Analyzer("snowball")
-                                //.SearchAnalyzer("snowball")
+                                .Analyzer("customanalyzer")
+                                .SearchAnalyzer("customanalyzer")
                                )
                                 .Text(c => c
                                    .Name(n => n.State)
-                                   // .Analyzer("keyworkd")
-                                   //.SearchAnalyzer("keyworkd")
+                                    .Analyzer("keyword")
                                )
                            )
               )
