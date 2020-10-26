@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Elasticsearch.API</name>
+    </assembly>
+    <members>
+        <member name="M:Elastticsearch.API.Controllers.ElasticsearchController.Get(Elasticsearch.Service.DTO.SearchFilter)">
+            <summary>
+            Return a List  of Properties Based on some parameters    
+            </summary>
+            <param name="filter">Filters to be used to search the Properties</param>
+            <returns></returns>
+        </member>
+        <member name="M:Elastticsearch.API.Controllers.ElasticsearchController.Post(System.Collections.Generic.List{Elasticsearch.Service.DTO.Building})">
+            <summary>
+            This method is used to insert data into Elasticsearch
+            </summary>
+            <param name="data">Information to be inserted</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

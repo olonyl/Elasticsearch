@@ -25,8 +25,17 @@ namespace Elasticsearch.Service.Services
 
         public List<Building> Search(SearchFilter filter)
         {
-            var result = GetBuildings(filter);
-
+            var result = _client.Search<Building>(s => s
+          .Index(ConstantsContainer.INDEXNAME)
+          .From(0)
+          .Size(filter.Limit)
+          .Query(q => q
+               .MultiMatch(m => m
+                  .Fields(fs => fs.Field(p => p.Market))
+                  .Query(filter.Market)
+               )
+            )
+           ).Documents.ToList();
             return result;
         }
         public void UploadBuildings(List<Building> data)
@@ -50,23 +59,6 @@ namespace Elasticsearch.Service.Services
                 }
                 )); ;
             waitHandle.Wait();
-        }
-
-        private List<Building> GetBuildings(SearchFilter filter)
-        {
-
-            var result = _client.Search<Building>(s => s
-            .Index(ConstantsContainer.INDEXNAME)
-            .From(0)
-            .Size(filter.Limit)
-            .Query(q => q
-                 .MultiMatch(m => m
-                    .Fields(fs => fs.Field(p => p.Market))
-                    .Query(filter.Phrase)
-                 )
-            )
-       ).Documents.ToList();
-            return result;
         }
 
     }
