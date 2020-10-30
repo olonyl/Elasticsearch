@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Auth0API.Options;
+using Elasticsearch.API.Middlewares;
 using Elasticsearch.Service.Externsion;
 using Elastticsearch.API.Helper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -81,11 +82,12 @@ namespace Elastticsearch.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseMiddleware<HttpRequestBodyMiddleware>();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseMiddleware<UnhandledExceptionMiddleware>();
             app.UseSwagger(option => option.RouteTemplate = swaggerOptions.JsonRoute);
             app.UseSwaggerUI(option => option.SwaggerEndpoint(swaggerOptions.UIEndpoint, swaggerOptions.Description));
 
