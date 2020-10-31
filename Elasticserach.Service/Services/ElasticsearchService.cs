@@ -23,6 +23,10 @@ namespace Elasticserach.Service.Services
             ILogger<ElasticsearchService> logger,
             IOptions<ElasticserachOptions> options)
         {
+            if (_elasticClient == null) {
+                logger?.LogError("Elastic Search Client DI has not been specified");
+                throw new ArgumentNullException(nameof(_elasticClient));
+            }
             _elasticClient = elasticClient;
             _logger = logger;
             _Index = options.Value.Index;
