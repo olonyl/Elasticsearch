@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Elasticsearch\Elasticserach.Service\Elasticserach.Service.csproj" />
+    <ProjectReference Include="..\Elasticserach.Service\Elasticserach.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>

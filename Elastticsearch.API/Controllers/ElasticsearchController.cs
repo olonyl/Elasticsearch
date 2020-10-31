@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Elasticsearch.Service.DTO;
 using Elasticserach.Service.Interfaces;
 using Elastticsearch.API.Controllers.Base;
