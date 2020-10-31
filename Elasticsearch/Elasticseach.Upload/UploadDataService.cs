@@ -1,7 +1,6 @@
 ﻿using Elasticsearch.Service.DTO;
 using Elasticsearch.Service.DTO.JSON;
-using Elasticsearch.Service.Helper;
-using Elasticsearch.Service.Interface;
+using Elasticserach.Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,8 +12,8 @@ namespace Elasticseach.Upload
 {
     public class UploadDataService
     {
-        private readonly ISearchEngineService _searchEngineService;
-        public UploadDataService(ISearchEngineService searchEngineService) => _searchEngineService = searchEngineService;
+        private readonly IElasticsearchService _searchEngineService;
+        public UploadDataService(IElasticsearchService searchEngineService) => _searchEngineService = searchEngineService;
 
         public void UploadData()
         {
@@ -22,7 +21,7 @@ namespace Elasticseach.Upload
             var data = GetProperties();
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"Uploading {data.Count} records into Elastic Search:Index - {ConstantsContainer.INDEXNAME}");
+            Console.WriteLine($"Uploading {data.Count} records into Elastic Search");
 
             _searchEngineService.UploadBuildings(data);
         }
@@ -46,7 +45,7 @@ namespace Elasticseach.Upload
                     Name = s.Management.Name,
                     Market = s.Management.Market,
                     State = s.Management.State,
-                    Type = ConstantsContainer.TYPEMANAGEMENT
+                    Type = "M"
                 }).ToList();
                 result.AddRange(managementTransformation);
 
@@ -59,7 +58,7 @@ namespace Elasticseach.Upload
                     City = s.Property.City,
                     StreetAddress = s.Property.StreetAddress,
                     Formername = s.Property.FormerName,
-                    Type = ConstantsContainer.TYPEPROPERTY
+                    Type = "P"
                 }).ToList();
                 result.AddRange(propertiesTransformation);
 

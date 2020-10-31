@@ -6,7 +6,9 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Auth0API.Options;
 using Elasticsearch.API.Middlewares;
-using Elasticsearch.Service.Externsion;
+using Elasticserach.Service.Extension;
+using Elasticserach.Service.Interfaces;
+using Elasticserach.Service.Services;
 using Elastticsearch.API.Helper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -37,14 +39,10 @@ namespace Elastticsearch.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSearchEngineService(o =>
-            {
-                var url = Configuration.GetSection("Elasticsearch:Url").Value;
-                var settings = new ConnectionSettings(new Uri(url)).EnableDebugMode();
-                o.Client = new ElasticClient(settings);
-                o.Congifure();
-            }
-            );
+            services.AddSingleton<IElasticsearchService, ElasticsearchService>();
+            services.Configure<ElasticserachOptions>(Configuration.GetSection(nameof(ElasticserachOptions)));
+
+
             var domain = $"https://{Configuration["Auth0:Domain"]}/";
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -76,6 +74,7 @@ namespace Elastticsearch.API
                 x.IncludeXmlComments(xmlPath);
             });
             services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
+            services.AddElasticsearch(Configuration);
             services.AddControllers();
         }
 

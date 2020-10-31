@@ -1,19 +1,13 @@
-﻿using Elasticsearch.Service.DTO;
-using Elasticsearch.Service.DTO.JSON;
-using Elasticsearch.Service.Externsion;
-using Elasticsearch.Service.Helper;
-using Elasticsearch.Service.Interface;
+﻿using Elasticserach.Service.Extension;
+using Elasticserach.Service.Interfaces;
+using Elasticserach.Service.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Nest;
+using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Formatting.Compact;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using System.Text.Json;
 using System.Threading;
 
 namespace Elasticseach.Upload
@@ -48,23 +42,23 @@ namespace Elasticseach.Upload
             var builder = new ConfigurationBuilder()
                .SetBasePath(Directory.GetCurrentDirectory())
                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            
 
             Configuration = builder.Build();
 
-            var serviceProvider = new ServiceCollection()
+            var services = new ServiceCollection()
             .AddLogging(configure => configure.AddSerilog())
-            .AddSearchEngineService(o =>
-            {
-                var url = Configuration.GetSection("Elasticsearch:Url").Value;
-                var settings = new ConnectionSettings(new Uri(url)).EnableDebugMode();
-                o.Client = new ElasticClient(settings);
-                o.Congifure();
-            }
-          ).BuildServiceProvider();
-            var service = serviceProvider.GetService<ISearchEngineService>();
+            .Configure<ElasticserachOptions>(Configuration.GetSection(nameof(ElasticserachOptions)))
+            .AddElasticsearch(Configuration)
+            .AddSingleton<IElasticsearchService, ElasticsearchService>();
+
+            var serviceProvider = services.BuildServiceProvider();
+          
+
+            var service = serviceProvider.GetService<IElasticsearchService>();
             UploadData(service);
         }
-        public static void UploadData(ISearchEngineService service)
+        public static void UploadData(IElasticsearchService service)
         {
             try {
                 Log.Information("Starting Procces to Upload Files into Elasticserach");

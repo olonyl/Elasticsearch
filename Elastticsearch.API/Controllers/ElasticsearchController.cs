@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Service.DTO;
-using Elasticsearch.Service.Interface;
+using Elasticserach.Service.Interfaces;
 using Elastticsearch.API.Controllers.Base;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,9 +16,9 @@ namespace Elastticsearch.API.Controllers
     {
      
         private readonly ILogger<ElasticsearchController> _logger;
-        private readonly ISearchEngineService _elasticsearchService;
-        public ElasticsearchController(ILogger<ElasticsearchController> logger, 
-            ISearchEngineService elasticsearchService)
+        private readonly IElasticsearchService _elasticsearchService;
+        public ElasticsearchController(ILogger<ElasticsearchController> logger,
+            IElasticsearchService elasticsearchService)
         {
             _logger = logger;
             _elasticsearchService = elasticsearchService;
