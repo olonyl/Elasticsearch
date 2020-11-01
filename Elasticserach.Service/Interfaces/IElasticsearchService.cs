@@ -8,7 +8,7 @@ namespace Elasticserach.Service.Interfaces
 {
     public interface IElasticsearchService
     {
-        List<Building> Search(SearchFilter filter);
-        void UploadBuildings(List<Building> data);
+        List<BuildingDTO> Search(SearchFilterDTO filter);
+        void UploadBuildings(List<BuildingDTO> data);
     }
 }

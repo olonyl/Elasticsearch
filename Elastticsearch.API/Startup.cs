@@ -6,7 +6,10 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Auth0API.Options;
 using Elasticsearch.API.Middlewares;
-using Elasticserach.Service.Extension;
+using Elasticsearch.Infrastructure.Adapter;
+using Elasticsearch.Infrastructure.Extension;
+using Elasticsearch.Infrastructure.Repositories;
+using Elasticserach.Domain.Interfaces;
 using Elasticserach.Service.Interfaces;
 using Elasticserach.Service.Services;
 using Elastticsearch.API.Helper;
@@ -32,17 +35,13 @@ namespace Elastticsearch.API
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-        Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
-    }
+            Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
+        }
 
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IElasticsearchService, ElasticsearchService>();
-            services.Configure<ElasticserachOptions>(Configuration.GetSection(nameof(ElasticserachOptions)));
-
-
             var domain = $"https://{Configuration["Auth0:Domain"]}/";
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -73,8 +72,12 @@ namespace Elastticsearch.API
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 x.IncludeXmlComments(xmlPath);
             });
-            services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
+
             services.AddElasticsearch(Configuration);
+            services.AddScoped<IElasticsearchService, ElasticsearchService>();
+            services.AddScoped<IBuildingRepository, BuildingRepository>();
+            services.AddSingleton<ITypeAdapterFactory, AutomapperTypeAdapterFactory>();
+            services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
             services.AddControllers();
         }
 
@@ -96,6 +99,10 @@ namespace Elastticsearch.API
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            var typeAdapterFactory = app.ApplicationServices.GetService<ITypeAdapterFactory>();
+            if (typeAdapterFactory == null) throw new Exception("TypeAdapterFactory has not been added");
+            TypeAdapterFactory.SetCurrent(typeAdapterFactory);
 
             app.UseEndpoints(endpoints =>
             {

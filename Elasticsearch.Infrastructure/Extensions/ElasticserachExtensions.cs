@@ -1,4 +1,4 @@
-﻿using Elasticsearch.Service.DTO;
+﻿using Elasticserach.Domain.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Nest;
@@ -6,23 +6,23 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Elasticserach.Service.Extension
+namespace Elasticsearch.Infrastructure.Extension
 {
     public static class ElasticsearchExtensions
     {
         public static IServiceCollection AddElasticsearch(this IServiceCollection services, IConfiguration configuration)
         {
             var url = configuration["ElasticserachOptions:Url"];
-            var defaultIndex = configuration["ElasticserachOptions:Index"];
-
+            var indexName = nameof(Building).ToLower();
             var settings = new ConnectionSettings(new Uri(url))
-                .DefaultIndex(defaultIndex);
+                .EnableDebugMode()
+                .DefaultIndex(indexName);
 
             AddDefaultMappings(settings);
 
             var client = new ElasticClient(settings);
-
-            CreateIndex(client, defaultIndex);
+            
+            CreateIndex(client, indexName);
 
             return services.AddSingleton<IElasticClient>(client);
 

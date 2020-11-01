@@ -1,5 +1,5 @@
-﻿using Elasticsearch.Service.DTO;
-using Elasticsearch.Service.DTO.JSON;
+﻿using Elasticseach.Upload.DTO.JSON;
+using Elasticsearch.Service.DTO;
 using Elasticserach.Service.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -25,11 +25,11 @@ namespace Elasticseach.Upload
 
             _searchEngineService.UploadBuildings(data);
         }
-        public static List<Building> GetProperties()
+        public static List<BuildingDTO> GetProperties()
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Reading files...");
-            List<Building> result = new List<Building>();
+            List<BuildingDTO> result = new List<BuildingDTO>();
             try
             {
                 string _filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
@@ -39,7 +39,7 @@ namespace Elasticseach.Upload
                 var management = JsonSerializer.Deserialize<List<Managements>>(strMgmt);
                 var properties = JsonSerializer.Deserialize<List<Apartments>>(strProperties);
 
-                var managementTransformation = management.Select(s => new Building
+                var managementTransformation = management.Select(s => new BuildingDTO
                 {
                     Id = s.Management.Id,
                     Name = s.Management.Name,
@@ -49,7 +49,7 @@ namespace Elasticseach.Upload
                 }).ToList();
                 result.AddRange(managementTransformation);
 
-                var propertiesTransformation = properties.Select(s => new Building
+                var propertiesTransformation = properties.Select(s => new BuildingDTO
                 {
                     Id = s.Property.Id,
                     Name = s.Property.Name,

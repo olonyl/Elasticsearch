@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Elasticserach.Domain.Seedwork;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
 namespace Elasticsearch.Service.DTO
 {
-    public class Building
+    public class BuildingDTO: Entity
     {
         /// <summary>
         /// Id formed by Record Id and Type

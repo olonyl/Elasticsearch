@@ -28,7 +28,7 @@ namespace Elastticsearch.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Authorize("read:properties")]
-        public IActionResult Get([FromQuery] SearchFilter filter)
+        public IActionResult Get([FromQuery] SearchFilterDTO filter)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace Elastticsearch.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Authorize("write:properties")]
-        public IActionResult Post(List<Building> data)
+        public IActionResult Post(List<BuildingDTO> data)
         {
             try
             {

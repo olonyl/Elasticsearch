@@ -1,9 +1,11 @@
-﻿using Elasticserach.Service.Extension;
+﻿using Elasticsearch.Infrastructure.Adapter;
+using Elasticsearch.Infrastructure.Extension;
+using Elasticsearch.Infrastructure.Repositories;
+using Elasticserach.Domain.Interfaces;
 using Elasticserach.Service.Interfaces;
 using Elasticserach.Service.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Formatting.Compact;
 using System;
@@ -42,18 +44,25 @@ namespace Elasticseach.Upload
             var builder = new ConfigurationBuilder()
                .SetBasePath(Directory.GetCurrentDirectory())
                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-            
+
 
             Configuration = builder.Build();
 
             var services = new ServiceCollection()
-            .AddLogging(configure => configure.AddSerilog())
-            .Configure<ElasticserachOptions>(Configuration.GetSection(nameof(ElasticserachOptions)))
-            .AddElasticsearch(Configuration)
-            .AddSingleton<IElasticsearchService, ElasticsearchService>();
+            .AddLogging(configure => configure.AddSerilog());
 
+            services.AddElasticsearch(Configuration);
+            services.AddScoped<IElasticsearchService, ElasticsearchService>();
+            services.AddScoped<IBuildingRepository, BuildingRepository>();
+            services.AddSingleton<ITypeAdapterFactory, AutomapperTypeAdapterFactory>();
+
+     
             var serviceProvider = services.BuildServiceProvider();
-          
+
+            var typeAdapterFactory = serviceProvider.GetService<ITypeAdapterFactory>();
+            if (typeAdapterFactory == null) throw new Exception("TypeAdapterFactory has not been added");
+            TypeAdapterFactory.SetCurrent(typeAdapterFactory);
+
 
             var service = serviceProvider.GetService<IElasticsearchService>();
             UploadData(service);

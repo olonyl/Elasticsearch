@@ -6,7 +6,7 @@ namespace Elasticserach.Domain.Interfaces
 {
     public interface IBuildingRepository
     {
-        List<Building> FindBuildings(string phrase, List<string> market, int Limit);
+        List<Building> FindBuildings(string phrase, List<string> market, int limit);
         void UploadBuildings(List<Building> data);
     }
 }

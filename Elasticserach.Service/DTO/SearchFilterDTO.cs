@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Elasticsearch.Service.DTO
 {
-    public class SearchFilter
+    public class SearchFilterDTO
     {
         /// <summary>
         /// Total of records to be returned

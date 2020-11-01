@@ -1,6 +1,7 @@
 ﻿using Elasticsearch.Service.DTO;
-using Elasticserach.Service.Extension;
+using Elasticserach.Domain.Interfaces;
 using Elasticserach.Service.Interfaces;
+using Elasticserach.Service.SeedWork;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Nest;
@@ -16,46 +17,30 @@ namespace Elasticserach.Service.Services
 {
     public class ElasticsearchService : IElasticsearchService
     {
-        private readonly IElasticClient _elasticClient;
         private readonly ILogger _logger;
-        private readonly string _Index;
-        public ElasticsearchService(IElasticClient elasticClient,
-            ILogger<ElasticsearchService> logger,
-            IOptions<ElasticserachOptions> options)
+        private readonly IBuildingRepository _buildingRepository;
+        public ElasticsearchService(IBuildingRepository buildingRepository,
+            ILogger<ElasticsearchService> logger)
         {
-            if (_elasticClient == null) {
-                logger?.LogError("Elastic Search Client DI has not been specified");
-                throw new ArgumentNullException(nameof(_elasticClient));
+            if (buildingRepository == null) {
+                logger?.LogError("IBuildingRepository has not been specified");
+                throw new ArgumentNullException(nameof(buildingRepository));
             }
-            _elasticClient = elasticClient;
             _logger = logger;
-            _Index = options.Value.Index;
+            _buildingRepository = buildingRepository;
         }
 
-        public List<Building> Search(SearchFilter filter)
+        public List<BuildingDTO> Search(SearchFilterDTO filter)
         {
             try
             {
                 _logger?.LogInformation($"Starting search into Elasticsearch {JsonConvert.SerializeObject(filter)}...");
-                var query = _elasticClient.Search<Building>(s => s
-             .Index(_Index)
-             .From(0)
-             .Size(filter.Limit)
-             .Query(q =>
-                 q.Bool(b => b
-                  .Should(filter.Market.Select(t => BuildPhraseQueryContainer(q, t, 1)).ToArray())
-                 ) && q.MultiMatch(mm => mm
-                        .Fields(fs => fs.Field(p => p.Name).Field(p => p.Formername).Field(p => p.StreetAddress))
-                         .Query(filter.Phrase)
-                        )
-                     )
-                 );
-
-                var result = query.Documents.ToList();
+            
+                var result = _buildingRepository.FindBuildings(filter.Phrase,filter.Market,filter.Limit);
 
                 _logger?.LogInformation($"The search result was {result.Count} records");
 
-                return result;
+                return result.ProjectedAsCollection<BuildingDTO>();
             }
             catch (Exception ex)
             {
@@ -64,33 +49,12 @@ namespace Elasticserach.Service.Services
             }
         }
 
-        public void UploadBuildings(List<Building> data)
+        public void UploadBuildings(List<BuildingDTO> data)
         {
             try
             {
-                _logger?.LogInformation($"Starting to upload {data.Count} records into Elasticsearch...");
-                var bulkAll = _elasticClient.BulkAll(data, b => b
-              .Index(_Index)
-             .BackOffRetries(2)
-             .BackOffTime("30s")
-             .RefreshOnCompleted(true)
-             .MaxDegreeOfParallelism(4)
-             .Size(1000)
-         );
-                var waitHandle = new CountdownEvent(1);
-                bulkAll.Subscribe(new BulkAllObserver(
-                    onNext: (b) => {
-                        //This is just to display the progress onto the windows console, remember this application can be something else
-                        Console.Write(".");
-                        _logger?.LogInformation($"{b.Items.Count} records to be uploaded");
-                    },
-                    onError: (e) => { throw e; },
-                    onCompleted: () =>
-                    {
-                        waitHandle.Signal();
-                    }
-                    )); ;
-                waitHandle.Wait();
+                _logger?.LogInformation($"Uplading {data.Count} records");
+                _buildingRepository.UploadBuildings(data.ProjectedAsCollection<Building>());
             }
             catch (Exception ex)
             {
