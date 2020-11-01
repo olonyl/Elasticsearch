@@ -13,6 +13,8 @@ namespace Elasticsearch.Infrastructure.Extension
         public static IServiceCollection AddElasticsearch(this IServiceCollection services, IConfiguration configuration)
         {
             var url = configuration["ElasticserachOptions:Url"];
+            if (url == null) throw new ArgumentNullException(nameof(url));
+
             var indexName = nameof(Building).ToLower();
             var settings = new ConnectionSettings(new Uri(url))
                 .EnableDebugMode()
