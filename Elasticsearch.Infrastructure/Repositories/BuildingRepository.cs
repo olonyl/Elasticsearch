@@ -77,12 +77,12 @@ namespace Elasticsearch.Infrastructure.Repositories
                 bulkAll.Subscribe(new BulkAllObserver(
                     onNext: (b) => {
                         //This is just to display the progress onto the windows console, remember this application can be something else
-                        Console.Write(".");
                         _logger?.LogInformation($"{b.Items.Count} records to be uploaded");
                     },
                     onError: (e) => { throw e; },
                     onCompleted: () =>
                     {
+                        _logger?.LogInformation($"Uploading process finished");
                         waitHandle.Signal();
                     }
                     )); ;
